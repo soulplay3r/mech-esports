@@ -1,0 +1,125 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Mech E-Sports design tokens (dark-only esports theme, shadcn/ui variable names). */
+:root {
+  --radius: 0.75rem;
+  --background: #05070b;
+  --foreground: #e8eef7;
+  --card: #0c1118;
+  --card-foreground: #e8eef7;
+  --popover: #0c1118;
+  --popover-foreground: #e8eef7;
+  --primary: #2f7bff;
+  --primary-foreground: #ffffff;
+  --secondary: #141b25;
+  --secondary-foreground: #e8eef7;
+  --muted: #121821;
+  --muted-foreground: #8592a6;
+  --accent: #22d3ee;
+  --accent-foreground: #031016;
+  --destructive: #ff4d6d;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --border: #1c2633;
+  --input: #1f2a38;
+  --ring: #2f7bff;
+  --surface-2: #101721;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface-2: var(--surface-2);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-rajdhani);
+  --font-mono: var(--font-jetbrains);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(60rem 30rem at 50% -10%, rgb(47 123 255 / 0.12), transparent 70%),
+      radial-gradient(40rem 20rem at 100% 0%, rgb(34 211 238 / 0.06), transparent 70%);
+    background-attachment: fixed;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-rajdhani), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+@utility grid-bg {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@utility neon-text {
+  text-shadow: 0 0 24px rgb(34 211 238 / 0.45);
+}
+
+@utility neon-ring {
+  box-shadow: 0 0 0 1px rgb(47 123 255 / 0.6), 0 0 28px -4px rgb(47 123 255 / 0.55);
+}
+
+@keyframes pulse-dot {
+  0%, 80%, 100% { opacity: 0.2; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+
+@keyframes flash-in {
+  0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgb(52 211 153 / 0.6); }
+  100% { transform: scale(1); box-shadow: 0 0 0 10px rgb(52 211 153 / 0); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@utility animate-rise {
+  animation: rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@utility animate-flash {
+  animation: flash-in 0.8s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
